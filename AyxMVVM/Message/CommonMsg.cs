@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AyxMVVM.Message
 {
-    class MsgArgs
+    public class CommonMsg:MessageBase
     {
     }
 }

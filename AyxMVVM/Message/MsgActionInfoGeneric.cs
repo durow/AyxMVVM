@@ -5,7 +5,19 @@ using System.Text;
 
 namespace AyxMVVM.Message
 {
-    class MsgActionInfo<T>:MsgActionInfo
+    class MsgActionInfo<T> : MsgActionInfo
     {
+        public new Action<T> Action { get; internal set; }
+
+        public new void Execute()
+        {
+            Execute(default(T));
+        }
+
+        public void Execute(T args)
+        {
+            if (Action != null)
+                Action(args);
+        }
     }
 }
