@@ -39,11 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\AyxCommand.cs" />
+    <Compile Include="Command\AyxCommandGeneric.cs" />
+    <Compile Include="Command\AyxEventCommand.cs" />
+    <Compile Include="Message\IMessageManager.cs" />
+    <Compile Include="Message\IMessageRegister.cs" />
+    <Compile Include="Message\MsgActionInfo.cs" />
+    <Compile Include="Message\MsgActionInfoGeneric.cs" />
+    <Compile Include="Message\MsgArgs.cs" />
+    <Compile Include="NotifyObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Threading\DispatcherHelper.cs" />
+    <Compile Include="ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Command\" />
-    <Folder Include="Message\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
