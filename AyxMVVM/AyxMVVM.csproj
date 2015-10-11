@@ -62,10 +62,10 @@
     <Compile Include="Threading\DispatcherHelper.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModelManager.cs" />
+    <Compile Include="ViewModel\ViewModelInfo.cs" />
+    <Compile Include="ViewModel\ViewModelManager.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
