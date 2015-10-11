@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿/*
+Author:durow
+Date:2015.10.11
+interface of MessageRegister
+*/
 
 namespace AyxMVVM.Message
 {

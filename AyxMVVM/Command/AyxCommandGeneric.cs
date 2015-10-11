@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿/*
+Author:durow
+Date:2015.10.11
+Binding command generic
+*/
+using System;
 using System.Windows.Input;
 
 namespace AyxMVVM.Command
@@ -9,7 +11,7 @@ namespace AyxMVVM.Command
     public class AyxCommand<T>
     {
         /// <summary>
-        /// 检查命令是否可以执行的事件，在UI事件发生导致控件状态或数据发生变化时触发
+        /// Binding command generic
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
@@ -30,28 +32,28 @@ namespace AyxMVVM.Command
         }
 
         /// <summary>
-        /// 判断命令是否可以执行的方法
+        /// The function that check if the command can execute
         /// </summary>
         private Func<T, bool> _canExecute;
 
         /// <summary>
-        /// 命令需要执行的方法
+        /// The action that the command execute
         /// </summary>
         private Action<T> _execute;
 
         /// <summary>
-        /// 创建一个命令
+        /// Create a new AyxCommand instance
         /// </summary>
-        /// <param name="execute">命令要执行的方法</param>
+        /// <param name="execute">The action that the command execute</param>
         public AyxCommand(Action<T> execute):this(execute, null)
         {
         }
 
         /// <summary>
-        /// 创建一个命令
+        /// Create a new AyxCommand instance
         /// </summary>
-        /// <param name="execute">命令要执行的方法</param>
-        /// <param name="canExecute">判断命令是否能够执行的方法</param>
+        /// <param name="execute">The action that the command execute</param>
+        /// <param name="canExecute">The function that check if the command can execute</param>
         public AyxCommand(Action<T> execute, Func<T, bool> canExecute)
         {
             _execute = execute;
@@ -59,10 +61,10 @@ namespace AyxMVVM.Command
         }
 
         /// <summary>
-        /// 判断命令是否可以执行
+        /// Method that check if the command can execute
         /// </summary>
-        /// <param name="parameter">命令传入的参数</param>
-        /// <returns>是否可以执行</returns>
+        /// <param name="parameter">Command's parameter</param>
+        /// <returns>if the command can execute</returns>
         public bool CanExecute(object parameter)
         {
             if (_canExecute == null) return true;
@@ -70,7 +72,7 @@ namespace AyxMVVM.Command
         }
 
         /// <summary>
-        /// 执行命令
+        /// Execute the command
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter)

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿/*
+Author:durow
+Date:2015.10.11
+Use this class to bind event to command
+*/
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
@@ -12,7 +13,7 @@ namespace AyxMVVM.Command
     {
 
         /// <summary>
-        /// 事件要绑定的命令
+        /// Command to bind
         /// </summary>
         public ICommand Command
         {
@@ -25,7 +26,7 @@ namespace AyxMVVM.Command
             DependencyProperty.Register("Command", typeof(ICommand), typeof(MyEventCommand), new PropertyMetadata(null));
 
         /// <summary>
-        /// 绑定命令的参数，保持为空就是事件的参数
+        /// Command parameter
         /// </summary>
         public object CommandParateter
         {
@@ -37,7 +38,6 @@ namespace AyxMVVM.Command
         public static readonly DependencyProperty CommandParateterProperty =
             DependencyProperty.Register("CommandParateter", typeof(object), typeof(MyEventCommand), new PropertyMetadata(null));
 
-        //执行事件
         protected override void Invoke(object parameter)
         {
             if (CommandParateter != null)

@@ -1,15 +1,22 @@
-﻿using System.ComponentModel;
+﻿/*
+Author:durow
+Date:2015.10.11
+implement INotifyPropertyChanged interface
+if property changed,can use RaisePropertyChanged method to Notify property changed
+*/
+
+using System.ComponentModel;
 
 namespace AyxMVVM
 {
-    public class NotifyObject:INotifyPropertyChanged
+    public class ObserveObject:INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// 属性发生改变时调用该方法发出通知
+        /// Raise notify when property value changed
         /// </summary>
-        /// <param name="propertyName">属性名称</param>
+        /// <param name="propertyName">property name</param>
         public void RaisePropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -18,6 +25,13 @@ namespace AyxMVVM
             }
         }
 
+        /// <summary>
+        /// if property value changed set property value and raise notify
+        /// </summary>
+        /// <typeparam name="T">property type</typeparam>
+        /// <param name="propertyName">property name</param>
+        /// <param name="oldValue">property old value</param>
+        /// <param name="newValue">property new value</param>
         protected virtual void SetAndNotifyIfChanged<T>(string propertyName, ref T oldValue, T newValue)
         {
             if (oldValue == null && newValue == null) return;
