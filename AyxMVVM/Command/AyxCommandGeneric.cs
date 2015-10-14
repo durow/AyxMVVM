@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace AyxMVVM.Command
 {
-    public class AyxCommand<T>
+    public class AyxCommand<T>:ICommand
     {
         /// <summary>
         /// Binding command generic

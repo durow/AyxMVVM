@@ -13,23 +13,7 @@ namespace AyxMVVM.Command
         /// <summary>
         /// Check if the command can execute
         /// </summary>
-        public event EventHandler CanExecuteChanged
-        {
-            add
-            {
-                if (_canExecute != null)
-                {
-                    CommandManager.RequerySuggested += value;
-                }
-            }
-            remove
-            {
-                if (_canExecute != null)
-                {
-                    CommandManager.RequerySuggested -= value;
-                }
-            }
-        }
+        public event EventHandler CanExecuteChanged;
 
         /// <summary>
         /// The function that check if the command can execute
