@@ -40,7 +40,7 @@ namespace MVVMAppTest.Model
             }
         }
 
-        private string _Img = "Assets/StoreLogo.png";
+        private string _Img = "../Assets/StoreLogo.png";
 
         public string Img
         {

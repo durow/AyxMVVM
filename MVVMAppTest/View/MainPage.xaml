@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="MVVMAppTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MVVMAppTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="PointerMoved">
+            <core:InvokeCommandAction Command="{Binding CmdMouseMove}"/>
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="pointer position(use event to command):" VerticalAlignment="Center"/>
+            <TextBox x:Name="TestTextBox" Text="{Binding TestText}" />
+            <StackPanel Orientation="Horizontal"
+                        Background="LightGray"
+                        Opacity="0.8"
+                        Margin="0,2,0,2">
+                <Button Content="Add" Command="{Binding CmdAdd}"/>
+                <Button Content="Delete" Command="{Binding CmdDelete}"/>
+                <Button Content="Clear" Command="{Binding CmdClear}"/>
+            </StackPanel>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel  Orientation="Vertical">
+                <ListView ItemsSource="{Binding TestDataList}"
+                    SelectedItem="{Binding SelectedData, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding BoolValue}" MinWidth="20" />
+                                <Image Source="{Binding Img}" Margin="1" Width="16" />
+                                <TextBlock Text="{Binding AddDateTime}"  Margin="1" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Remark}" Margin="1"  VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+        
+    </Grid>
+</Page>

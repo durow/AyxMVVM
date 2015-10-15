@@ -8,7 +8,7 @@ namespace MVVMAppTest.ViewModel
 {
     class MainPageViewModel:ViewModelBase
     {
-        private string _TestText = "test";
+        private string _TestText;
 
         public string TestText
         {
