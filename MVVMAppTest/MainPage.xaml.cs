@@ -12,11 +12,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using AppTest.ViewModel;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
-namespace AppTest
+namespace MVVMAppTest
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -26,7 +25,6 @@ namespace AppTest
         public MainPage()
         {
             this.InitializeComponent();
-            this.DataContext = new MainPageViewModel();
         }
     }
 }

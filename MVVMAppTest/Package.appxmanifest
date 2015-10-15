@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="9d046229-890b-4f37-bef3-54fd9fb58b31"
+    Name="693835b7-a5d6-4e79-abcc-1e62c434cd7b"
     Publisher="CN=durow"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="9d046229-890b-4f37-bef3-54fd9fb58b31" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="693835b7-a5d6-4e79-abcc-1e62c434cd7b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>AppTest</DisplayName>
+    <DisplayName>MVVMAppTest</DisplayName>
     <PublisherDisplayName>durow</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="AppTest.App">
+      EntryPoint="MVVMAppTest.App">
       <uap:VisualElements
-        DisplayName="AppTest"
+        DisplayName="MVVMAppTest"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="AppTest"
+        Description="MVVMAppTest"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
