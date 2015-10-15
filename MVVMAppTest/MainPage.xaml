@@ -8,7 +8,15 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding CmdLoaded}"/>
+        </core:EventTriggerBehavior>
+        <core:EventTriggerBehavior EventName="PointerMoved">
+            <core:InvokeCommandAction Command="{Binding CmdMouseMove}"/>
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
