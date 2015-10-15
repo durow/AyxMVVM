@@ -1,11 +1,7 @@
 ﻿using AyxMVVM;
 using AyxMVVM.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Devices.Input;
+using MVVMAppTest.Model;
+using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Input;
 
 namespace MVVMAppTest.ViewModel
@@ -27,24 +23,41 @@ namespace MVVMAppTest.ViewModel
             }
         }
 
-        private AyxCommand _CmdLoaded;
+        private TestData _SelectedData;
 
-        /// <summary>
-        /// Gets the CmdLoaded.
-        /// </summary>
-        public AyxCommand CmdLoaded
+        public TestData SelectedData
         {
-            get
+            get { return _SelectedData; }
+            set
             {
-                if (_CmdLoaded == null)
-                    _CmdLoaded = new AyxCommand(
-                    o =>
-                    {
-                        TestText = o.GetType().ToString();
-                    },
-                    o => true);
-                return _CmdLoaded;
+                if (_SelectedData != value)
+                {
+                    _SelectedData = value;
+                    RaisePropertyChanged("SelectedData");
+                    CmdDelete.RaiseCanExecuteChanged();
+                }
             }
+        }
+
+
+        private ObservableCollection<TestData> _TestDataList;
+
+        public ObservableCollection<TestData> TestDataList
+        {
+            get { return _TestDataList; }
+            set
+            {
+                if (_TestDataList != value)
+                {
+                    _TestDataList = value;
+                    RaisePropertyChanged("TestDataList");
+                }
+            }
+        }
+
+        public MainPageViewModel()
+        {
+            TestDataList = new ObservableCollection<TestData>(TestData.InitData());
         }
 
         private AyxCommand _CmdMouseMove;
@@ -70,6 +83,69 @@ namespace MVVMAppTest.ViewModel
                         TestText = point.Position.X + "     " + point.Position.Y;
                     });
                 return _CmdMouseMove;
+            }
+        }
+
+        private AyxCommand _CmdTest;
+
+        private AyxCommand _CmdAdd;
+
+        /// <summary>
+        /// Gets the CmdAdd.
+        /// </summary>
+        public AyxCommand CmdAdd
+        {
+            get
+            {
+                if (_CmdAdd == null)
+                    _CmdAdd = new AyxCommand(
+                    o =>
+                    {
+                        TestDataList.Add(TestData.GetInstance());
+                    });
+                return _CmdAdd;
+            }
+        }
+
+        private AyxCommand _CmdDelete;
+
+        /// <summary>
+        /// Gets the CmdDelete.
+        /// </summary>
+        public AyxCommand CmdDelete
+        {
+            get
+            {
+                if (_CmdDelete == null)
+                    _CmdDelete = new AyxCommand(
+                    o =>
+                    {
+                        if (SelectedData != null)
+                            TestDataList.Remove(SelectedData);
+                    },
+                    o=> {
+                        return SelectedData != null;
+                    });
+                return _CmdDelete;
+            }
+        }
+
+        private AyxCommand _CmdClear;
+
+        /// <summary>
+        /// Gets the CmdClear.
+        /// </summary>
+        public AyxCommand CmdClear
+        {
+            get
+            {
+                if (_CmdClear == null)
+                    _CmdClear = new AyxCommand(
+                    o =>
+                    {
+                        TestDataList.Clear();
+                    });
+                return _CmdClear;
             }
         }
     }

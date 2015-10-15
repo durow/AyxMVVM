@@ -8,10 +8,8 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
     <i:Interaction.Behaviors>
-        <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding CmdLoaded}"/>
-        </core:EventTriggerBehavior>
         <core:EventTriggerBehavior EventName="PointerMoved">
             <core:InvokeCommandAction Command="{Binding CmdMouseMove}"/>
         </core:EventTriggerBehavior>
@@ -22,10 +20,27 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="147*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="AyxMVVM UWP Test!" VerticalAlignment="Center"/>
+        <TextBlock Text="pointer position(use event to command):" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="1" Orientation="Vertical">
-            <Button Content="TestButton"/>
             <TextBox x:Name="TestTextBox" Text="{Binding TestText}" />
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Add" Command="{Binding CmdAdd}"/>
+                <Button Content="Delete" Command="{Binding CmdDelete}"/>
+                <Button Content="Clear" Command="{Binding CmdClear}"/>
+            </StackPanel>
+            <ListView ItemsSource="{Binding TestDataList}" 
+                      SelectedItem="{Binding SelectedData, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding BoolValue}" Margin="1"/> 
+                            <Image Source="{Binding Img}" Width="16" Margin="2"/>
+                            <TextBlock Text="{Binding AddDateTime}" Margin="2" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Remark}" Margin="2" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </Page>

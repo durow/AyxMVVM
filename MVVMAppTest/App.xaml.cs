@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using AyxMVVM;
+using MVVMAppTest.ViewModel;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace MVVMAppTest
@@ -30,6 +22,7 @@ namespace MVVMAppTest
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            RegisterViewModels();
         }
 
         /// <summary>
@@ -100,6 +93,11 @@ namespace MVVMAppTest
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: 保存应用程序状态并停止任何后台活动
             deferral.Complete();
+        }
+
+        private void RegisterViewModels()
+        {
+            ViewModelManager.Register<MainPage, MainPageViewModel>();
         }
     }
 }

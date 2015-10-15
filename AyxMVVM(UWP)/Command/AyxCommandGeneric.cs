@@ -66,5 +66,11 @@ namespace AyxMVVM.Command
                 _execute((T)parameter);
             }
         }
+
+        public void RaiseCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, EventArgs.Empty);
+        }
     }
 }
