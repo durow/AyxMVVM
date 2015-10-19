@@ -67,10 +67,14 @@ namespace AyxMVVM.Command
             }
         }
 
+        /// <summary>
+        /// Check if the command can execute
+        /// </summary>
         public void RaiseCanExecuteChanged()
         {
             if (CanExecuteChanged != null)
                 CanExecuteChanged(this, EventArgs.Empty);
         }
+
     }
 }

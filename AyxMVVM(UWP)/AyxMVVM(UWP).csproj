@@ -124,14 +124,6 @@
     <Compile Include="ViewModel\ViewModelInfo.cs" />
     <Content Include="Properties\AyxMVVM_UWP_.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Xaml.Interactions">
-      <HintPath>..\Dlls\Microsoft.Xaml.Interactions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xaml.Interactivity">
-      <HintPath>..\Dlls\Microsoft.Xaml.Interactivity.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
