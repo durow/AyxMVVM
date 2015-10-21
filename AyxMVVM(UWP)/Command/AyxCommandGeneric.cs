@@ -4,6 +4,7 @@ Date:2015.10.11
 Binding command generic
 */
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace AyxMVVM.Command
@@ -23,7 +24,7 @@ namespace AyxMVVM.Command
         /// <summary>
         /// The action that the command execute
         /// </summary>
-        private Action<T> _execute;
+        private Func<T, Task> _execute;
 
         /// <summary>
         /// Create a new AyxCommand instance
@@ -40,7 +41,17 @@ namespace AyxMVVM.Command
         /// <param name="canExecute">The function that check if the command can execute</param>
         public AyxCommand(Action<T> execute, Func<T, bool> canExecute)
         {
-            _execute = execute;
+            _execute = (t) => { execute(t); return Task.Delay(0); };
+            _canExecute = canExecute;
+        }
+
+        public AyxCommand(Func<T,Task> asyncExecute)
+            :this(asyncExecute,(t)=>true)
+        { }
+
+        public AyxCommand(Func<T,Task> asyncExecute,Func<T,bool> canExecute)
+        {
+            _execute = asyncExecute;
             _canExecute = canExecute;
         }
 
@@ -59,18 +70,19 @@ namespace AyxMVVM.Command
         /// Execute the command
         /// </summary>
         /// <param name="parameter"></param>
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
             if (_execute != null && CanExecute(parameter))
             {
-                _execute((T)parameter);
+                await _execute((T)parameter);
             }
         }
 
         public void RaiseCanExecuteChanged()
         {
-            if (CanExecuteChanged != null)
-                CanExecuteChanged(this, EventArgs.Empty);
+            var handler = CanExecuteChanged;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

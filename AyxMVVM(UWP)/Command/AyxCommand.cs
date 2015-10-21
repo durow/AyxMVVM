@@ -4,6 +4,7 @@ Date:2015.10.11
 Binding command
 */
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace AyxMVVM.Command
@@ -18,18 +19,18 @@ namespace AyxMVVM.Command
         /// <summary>
         /// The function that check if the command can execute
         /// </summary>
-        private Func<object, bool> _canExecute;
+        private Func<bool> _canExecute;
 
         /// <summary>
         /// The action that the command execute
         /// </summary>
-        private Action<object> _execute;
+        private Func<Task> _execute;
 
         /// <summary>
         /// Create a new AyxCommand instance
         /// </summary>
         /// <param name="execute">The action that the command execute</param>
-        public AyxCommand(Action<object> execute):this(execute,null)
+        public AyxCommand(Action execute):this(execute,()=>true)
         {
         }
 
@@ -38,12 +39,21 @@ namespace AyxMVVM.Command
         /// </summary>
         /// <param name="execute">The action that the command execute</param>
         /// <param name="canExecute">The function that check if the command can execute</param>
-        public AyxCommand(Action<object> execute, Func<object, bool> canExecute)
+        public AyxCommand(Action execute, Func<bool> canExecute)
         {
-            _execute = execute;
+            _execute = () => { execute(); return Task.Delay(0); };
             _canExecute = canExecute;
         }
 
+        public AyxCommand(Func<Task> asyncExecute)
+            :this(asyncExecute,()=>true)
+        { }
+
+        public AyxCommand(Func<Task> asyncExecute,Func<bool> canExecute)
+        {
+            _execute = asyncExecute;
+            _canExecute = canExecute;
+        }
         /// <summary>
         /// Method that check if the command can execute
         /// </summary>
@@ -52,18 +62,18 @@ namespace AyxMVVM.Command
         public bool CanExecute(object parameter)
         {
             if (_canExecute == null) return true;
-            return _canExecute(parameter);
+            return _canExecute();
         }
 
         /// <summary>
         /// Execute the command
         /// </summary>
         /// <param name="parameter">Command's parameter</param>
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
             if (_execute != null && CanExecute(parameter))
             {
-                _execute(parameter);
+                await _execute();
             }
         }
 
@@ -72,8 +82,9 @@ namespace AyxMVVM.Command
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
-            if (CanExecuteChanged != null)
-                CanExecuteChanged(this, EventArgs.Empty);
+            var handler = CanExecuteChanged;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
     }
