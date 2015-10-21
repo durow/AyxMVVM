@@ -7,8 +7,7 @@ namespace AyxMVVM.Helper
     {
         public static object CreateInstance(Type type,object[] parameters=null)
         {
-            var constructor = type.GetConstructor(Type.EmptyTypes);
-            return constructor.Invoke(parameters);
+            return type.GetConstructor(Type.EmptyTypes).Invoke(parameters);
         }
 
         public static T CreateInstance<T>(object[] parameters=null)
