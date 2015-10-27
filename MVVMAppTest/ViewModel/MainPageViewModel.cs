@@ -1,6 +1,7 @@
 ﻿using AyxMVVM;
 using AyxMVVM.Command;
 using MVVMAppTest.Model;
+using System;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Input;
 
@@ -60,17 +61,17 @@ namespace MVVMAppTest.ViewModel
             TestDataList = new ObservableCollection<TestData>(TestData.InitData());
         }
 
-        private AyxCommand _CmdMouseMove;
+        private AyxCommand<PointerRoutedEventArgs> _CmdMouseMove;
 
         /// <summary>
         /// Gets the CmdMouseMove.
         /// </summary>
-        public AyxCommand CmdMouseMove
+        public AyxCommand<PointerRoutedEventArgs> CmdMouseMove
         {
             get
             {
                 if (_CmdMouseMove == null)
-                    _CmdMouseMove = new AyxCommand(
+                    _CmdMouseMove = new AyxCommand<PointerRoutedEventArgs>(
                     o =>
                     {
                         PointerRoutedEventArgs arg = o as PointerRoutedEventArgs;
@@ -99,7 +100,7 @@ namespace MVVMAppTest.ViewModel
             {
                 if (_CmdAdd == null)
                     _CmdAdd = new AyxCommand(
-                    o =>
+                    () =>
                     {
                         TestDataList.Add(TestData.GetInstance());
                     });
@@ -118,12 +119,12 @@ namespace MVVMAppTest.ViewModel
             {
                 if (_CmdDelete == null)
                     _CmdDelete = new AyxCommand(
-                    o =>
+                    new Action(()=>
                     {
                         if (SelectedData != null)
                             TestDataList.Remove(SelectedData);
-                    },
-                    o=> {
+                    }),
+                    ()=> {
                         return SelectedData != null;
                     });
                 return _CmdDelete;
@@ -141,12 +142,22 @@ namespace MVVMAppTest.ViewModel
             {
                 if (_CmdClear == null)
                     _CmdClear = new AyxCommand(
-                    o =>
+                    () =>
                     {
                         TestDataList.Clear();
                     });
                 return _CmdClear;
             }
+        }
+
+        public override void InitTestData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void InitRealData()
+        {
+            throw new NotImplementedException();
         }
     }
 }
