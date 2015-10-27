@@ -1,2 +1,3 @@
 # AyxMVVM
-This is MVVM toolkit，only can used in WPF now,and have some problems also.I'll try to make it better.
+This is MVVM toolkit，I'll try to make it better.
+2015.10.20 Add to support Windows10 UWP.
