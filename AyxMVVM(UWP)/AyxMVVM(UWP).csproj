@@ -122,6 +122,7 @@
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModelManager.cs" />
     <Compile Include="ViewModel\ViewModelInfo.cs" />
+    <Compile Include="VMLocatorBase.cs" />
     <Content Include="Properties\AyxMVVM_UWP_.rd.xml" />
   </ItemGroup>
   <ItemGroup />
