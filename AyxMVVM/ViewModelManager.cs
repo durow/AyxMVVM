@@ -3,6 +3,7 @@ Author:durow
 Date:2015.10.11
 This is a container userd for register View,ViewModel and MessageRegister
 */
+
 using AyxMVVM.Message;
 using AyxMVVM.ViewModel;
 using System;

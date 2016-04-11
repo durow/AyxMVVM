@@ -5,6 +5,7 @@ all ViewModel's base class.
 Use MsgManager to send message.
 Use UIDispatcher to cross to View's thread.
 */
+
 using System.Windows.Threading;
 using AyxMVVM.Message;
 using AyxMVVM.Threading;
